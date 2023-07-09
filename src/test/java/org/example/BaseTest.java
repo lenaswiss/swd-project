@@ -4,6 +4,8 @@ import org.apache.log4j.Logger;
 import org.junit.After;
 import org.junit.Before;
 import org.openqa.selenium.PageLoadStrategy;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.ProfilesIni;
 import org.example.pages.BasePage;
@@ -30,7 +32,7 @@ public class BaseTest {
 
     @Before
     public void setUp() throws Exception {
-        webDriver = initDriver();
+        webDriver = initDriverChrome();
         webDriver.manage().window();
         webDriver.manage().timeouts().implicitlyWait(configProperties.TIME_FOR_DEFAULT_WAIT(), TimeUnit.SECONDS);
         logger.info("Browser was opened.");
@@ -47,6 +49,16 @@ public class BaseTest {
         File fileFF = new File("./drivers/geckodriver");
         System.setProperty("webdriver.gecko.driver", fileFF.getAbsolutePath());
         webDriver = new FirefoxDriver(firefoxOptions);
+        return webDriver;
+    }
+
+    private WebDriver initDriverChrome() throws Exception {
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.setPageLoadStrategy(PageLoadStrategy.EAGER);
+        File fileFF = new File("./drivers/chromedriver");
+        System.setProperty("webdriver.chrome.driver", fileFF.getAbsolutePath());
+        webDriver = new ChromeDriver(chromeOptions);
+//        webDriver = new ChromeDriver();
         return webDriver;
     }
 

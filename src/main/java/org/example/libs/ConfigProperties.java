@@ -6,6 +6,9 @@ import org.aeonbits.owner.Config;
 public interface ConfigProperties extends Config{
 
     String base_url();
+    String API_KEY();
+
+    String API_BASE_URL();
     long TIME_FOR_DEFAULT_WAIT();
     long TIME_FOR_EXPLICIT_WAIT_LOW();
     long TIME_FOR_EXPLICIT_WAIT_HIGH();

@@ -7,12 +7,11 @@ import org.testng.asserts.SoftAssert;
 import java.util.List;
 import java.util.Random;
 
-public class MovieReworkedTest extends BaseTest{
+public class MovieReworkedTest extends BaseTest {
     SoftAssert softAssert = new SoftAssert();
 
-
     @Test
-    public void topMoviePageTest() {
+    public void topMoviePageTest() throws Exception{
         basePage.openTop250MoviesPage();
         List<Movie> top250MoviesList = top250MoviesPage.getListOfTopMoviesRework();
         Movie foundMovie = top250MoviesPage.findMovieByTitle(top250MoviesList, "The Godfather");
@@ -21,8 +20,8 @@ public class MovieReworkedTest extends BaseTest{
         softAssert.assertTrue(foundMovie.toString().equals(moviePageInfo.toString()), "Information about the movie is wrong");
     }
 
-    @Test
-    public void moviePageTest() {
+        @Test
+    public void moviePageTest() throws Exception{
         basePage.openTop250MoviesPage();
         List<Movie> top250MoviesList = top250MoviesPage.getListOfTopMoviesRework();
         Movie randomMovieFromTopList = top250MoviesList.get(new Random().nextInt(250));

@@ -20,7 +20,7 @@ public class BasePage extends ParentPage {
     private WebElement contextMenuMovie;
     @FindBy(css = "[href = '/chart/top/?ref_=nv_mv_250']")
     private WebElement contextMenuTop250;
-    WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(30));
+    WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(10));
 
     public BasePage(WebDriver webDriver) {
         super(webDriver);
@@ -38,7 +38,6 @@ public class BasePage extends ParentPage {
             menu.click();
             WebElement top250Movies = webDriver.findElement(By.cssSelector("[href = '/chart/top/?ref_=nv_mv_250']"));
             top250Movies.click();
-            wait.until(ExpectedConditions.visibilityOfAllElements(webDriver.findElement(By.cssSelector("h1.header"))));
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

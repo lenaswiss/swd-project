@@ -4,7 +4,7 @@ public class Title {
     public String id;
     public String title;
     public String type;
-    public int year;
+    public String year;
     public Ratings ratings;
 
     @Override
@@ -13,7 +13,7 @@ public class Title {
                 "id='" + id + '\'' +
                 ", title='" + title + '\'' +
                 ", type='" + type + '\'' +
-                ", year=" + year +
+                ", year='" + year + '\'' +
                 ", ratings=" + ratings +
                 '}';
     }

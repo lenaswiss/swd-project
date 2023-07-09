@@ -7,14 +7,14 @@ public class Ratings {
     public String id;
     public String title;
     @SerializedName("imDb")
-    public float rating;
+    public String rating;
 
     @Override
     public String toString() {
         return "Ratings{" +
                 "id='" + id + '\'' +
                 ", title='" + title + '\'' +
-                ", ratings=" + rating +
+                ", rating='" + rating + '\'' +
                 '}';
     }
 }

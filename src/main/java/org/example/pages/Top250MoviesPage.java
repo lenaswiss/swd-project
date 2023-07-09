@@ -3,7 +3,9 @@ package org.example.pages;
 import org.example.models.Movie;
 
 import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
@@ -36,7 +38,8 @@ public class Top250MoviesPage extends ParentPage {
     private List<WebElement> moviesMetaSecondView;
     @FindBy(css = "[data-testid=\"snackbase-close\"] #iconContext-clear")
 
-    WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(30));
+    WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofMillis(10_000));
+    Actions action = new Actions(webDriver);
 
     public Top250MoviesPage(WebDriver webDriver) {
         super(webDriver);
@@ -132,15 +135,15 @@ public class Top250MoviesPage extends ParentPage {
     public void openMoviePageByPosition(String position) {
         try {
             if (!testSideBarIsNotDisplayed()) {
-                for (int i = 0; i < 3; i++) {
-                    WebElement movie = webDriver.findElement(By.cssSelector(String.format("[href=\"/title/tt0068646/?ref_=chttp_t_%s\"]", position)));
-                    movie.click();
-                }
+                WebElement movie = webDriver.findElement(By.cssSelector(String.format("[href$=\"_=chttp_t_%s\"]", position)));
+                wait.until(ExpectedConditions.elementToBeClickable(movie.findElement(By.xpath(".."))));
+                action.scrollToElement(movie).click().perform();
+                movie.click();
             } else {
-                for (int i = 0; i < 3; i++) {
-                    WebElement movie = webDriver.findElement(By.cssSelector(String.format("[data-value = \"%s\"]", position)));
-                    movie.findElement(By.xpath("..")).click();
-                }
+                WebElement movie = webDriver.findElement(By.cssSelector(String.format("[data-value = \"%s\"]", position)));
+                action.scrollToElement(movie);
+                wait.until(ExpectedConditions.elementToBeClickable(movie.findElement(By.xpath(".."))));
+                movie.findElement(By.xpath("..")).click();
             }
         } catch (Exception e) {
             e.printStackTrace();

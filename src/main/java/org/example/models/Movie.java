@@ -21,6 +21,14 @@ public class Movie {
         this.rating = rating;
     }
 
+    public Movie(String title, String position, String year, String rating, String id) {
+        this.id = id;
+        this.position = position;
+        this.title = title;
+        this.year = year;
+        this.rating = rating;
+    }
+
     @Override
     public String toString() {
         return "Movie{" +
